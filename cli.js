@@ -1,5 +1,5 @@
 var weather = require('weather-js');
-var WeatherAdmin = require("./WeatherAdmin");
+var WeatherAdmin = require("./WeatherAdmin/usersearch");
 
 var loginType = process.argv[2];
 
@@ -7,10 +7,11 @@ var userName = process.argv[3];
 
 var city = process.argv[4];
 
-var MyAdmin = new WeatherAdmin();
+console.log(loginType)
 
 if (loginType === "admin") {
     MyAdmin.getData();
 } else {
-    MyAdmin.newUserSearch(userName, city);
+    var MyAdmin = new WeatherAdmin(userName, city);
+    MyAdmin.getWeather();
 }
