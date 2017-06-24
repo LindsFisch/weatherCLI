@@ -10,8 +10,10 @@ var city = process.argv[4];
 console.log(loginType)
 
 if (loginType === "admin") {
-    MyAdmin.getData();
+    var MyAdmin = new WeatherAdmin();
+    MyAdmin.getData();    
 } else {
     var MyAdmin = new WeatherAdmin(userName, city);
     MyAdmin.getWeather();
 }
+

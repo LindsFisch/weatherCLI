@@ -1,17 +1,38 @@
 var weather = require("weather-js");
 
-function UserSearch(userName, city) {
+ var fs = require('fs');
+
+function WeatherAdmin(userName, city){
     this.userName = userName;
     this.city = city;
-    this.date = Date.now();
-    console.log('here')
+
     this.getWeather = function () {
-        weather.find({ search: city, degreeType: 'F' }, function (err, result) {
+        weather.find({ search: this.city, degreeType: 'F' }, function (err, result) {
             if (err) console.log(err);
 
             console.log(JSON.stringify(result, null, 2));
         });
+        fs.appendFile("log.txt", "Name: " + this.userName + " Location: " + this.city + " Date: " + Date.now());
+
+    }, 
+
+    this.getData = function () {
+        fs.readFile("log.txt", "utf8", function(err, data) {
+            if (err) {
+                console.log(err);
+            }
+            console.log(data);
+        })
     }
 }
 
-module.exports = UserSearch;
+
+module.exports = WeatherAdmin;
+
+
+
+
+
+
+
+
